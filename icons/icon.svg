@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <!-- Background: Rounded Square -->
+  <rect x="10" y="10" width="108" height="108" rx="24" ry="24" fill="url(#bgGrad)" />
+  
+  <!-- Note Paper -->
+  <rect x="32" y="24" width="64" height="80" rx="4" ry="4" fill="#ffffff" />
+  
+  <!-- Content Lines -->
+  <line x1="42" y1="40" x2="86" y2="40" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
+  <line x1="42" y1="56" x2="86" y2="56" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
+  <line x1="42" y1="72" x2="64" y2="72" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" />
+  
+  <!-- Badge: Codeforces Style (Yellow/Red) but kept simple -->
+  <circle cx="96" cy="96" r="22" fill="#facc15" stroke="#ffffff" stroke-width="4" />
+  
+  <!-- Code Symbol: < > -->
+  <!-- Left Bracket < -->
+  <path d="M 92 88 L 84 96 L 92 104" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <!-- Right Bracket > -->
+  <path d="M 100 88 L 108 96 L 100 104" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+</svg>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CF Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>CF Notes</h1>
+            <button id="add-btn" class="btn-icon" aria-label="Add Problem">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </header>
+
+        <div id="search-container" class="search-box">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="search-input" placeholder="Search problems...">
+            <button id="filter-toggle-btn" class="btn-icon" aria-label="Filter" style="margin-left: 8px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="filter-panel" class="filter-panel hidden">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="filter-rating">Rating</label>
+                    <input type="number" id="filter-rating" placeholder="e.g. 800">
+                </div>
+                <div class="filter-group" style="flex: 2;">
+                    <label for="filter-tags">Tags</label>
+                    <input type="text" id="filter-tags" placeholder="dp, math...">
+                </div>
+            </div>
+        </div>
+
+        <div id="list-view" class="view active">
+            <div id="problems-list" class="problems-list">
+                <!-- Problems will be injected here -->
+                <div class="empty-state">
+                    <p>No problems saved yet.</p>
+                </div>
+            </div>
+            <div class="list-footer">
+                <button id="export-btn" class="btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        class="feather feather-download" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Export JSON
+                </button>
+                <button id="import-btn" class="btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        class="feather feather-upload" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                    Import JSON
+                </button>
+                <input type="file" id="import-file" accept=".json" style="display:none">
+            </div>
+        </div>
+
+        <div id="form-view" class="view hidden">
+            <div class="form-header">
+                <h2 id="form-title">Add Problem</h2>
+            </div>
+            <form id="problem-form">
+                <div class="input-group">
+                    <label for="problem-link">Link</label>
+                    <input type="url" id="problem-link" placeholder="https://codeforces.com/problemset/problem/..."
+                        required>
+                </div>
+                <div class="input-group">
+                    <label for="problem-notes">Notes</label>
+                    <textarea id="problem-notes" placeholder="Approach, algorithm, or key insights..."
+                        rows="6"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancel-btn" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Note</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="detail-view" class="view hidden">
+            <header class="detail-header">
+                <button id="back-btn" class="btn-icon" aria-label="Back">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <button id="detail-edit-btn" class="btn-secondary">Edit</button>
+            </header>
+            <div id="detail-content">
+                <h2 id="detail-title">Problem Name</h2>
+                <div id="detail-meta" class="meta-row"></div>
+                <div id="detail-tags" class="tags-container"></div>
+                <div class="detail-divider"></div>
+                <div id="detail-notes" class="detail-notes-full"></div>
+                <a id="detail-link" href="#" target="_blank" class="btn-primary"
+                    style="margin-top: 20px; display: inline-block; text-align: center; text-decoration: none;">Open
+                    Problem</a>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
