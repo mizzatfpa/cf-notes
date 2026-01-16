@@ -469,6 +469,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Ctrl+Enter to save
+    elements.inputs.notes.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            elements.form.requestSubmit();
+        }
+    });
+
     elements.form.addEventListener('submit', (e) => {
         e.preventDefault();
         State.save(
